@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -23,8 +24,14 @@ func PerformGetRequest() {
 	fmt.Println("Status code ", response.StatusCode)
 	fmt.Println(response.ContentLength)
 
+	var responseString strings.Builder
+
 	content, _ := io.ReadAll(response.Body)
 
-	fmt.Println(string(content))
+	byteCount, _ := responseString.Write(content)
+	fmt.Println(byteCount)
+	fmt.Println(responseString.String() )
+
+	// fmt.Println(string(content))
 
 }
